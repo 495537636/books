@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lmg.books.dao.IUserDao">
+	<resultMap id="BaseResultMap" type="com.lmg.books.bean.Userinfo">
+		<id column="userid" property="userid" jdbcType="INTEGER" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="phonenum" property="phonenum" jdbcType="VARCHAR" />
+		<result column="userflag" property="userFlag" jdbcType="INTEGER" />
+		<result column="createtime" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="checkcode" property="checkcode" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		userid,username,password,phonenum,userflag,createtime,checkcode
+	</sql>
+
+	<!-- 查询手机号是否注册 -->
+	<select id="checkPhoneNumIsRegist" resultType="int">
+		select count(0) from userinfo where phonenum=#{param1} and userflag=0
+	</select>
+
+	<!-- 根据用户名查询用户信息
+	<select id="findUserByLoginName" resultType="com.loving.quandl.bean.Userinfo">
+		select
+		<include refid="Base_Column_List" />
+		from userinfo where username=#{param1}
+	</select> -->
+	
+	<!-- 验证用户名是否存在
+	<select id="checkUsername" resultType="java.lang.Integer">
+		select count(0) from userinfo where username=#{param1}
+	</select> -->
+	
+	<!-- 注册用户
+	<insert id="registerUser" parameterType="com.loving.quandl.bean.Userinfo">
+		insert into userinfo values(#{userid},#{username},#{realname},#{sex},#{password},#{phone},
+		#{email},#{createTime},#{userFlag},#{userType},#{otherInfo})
+	</insert> -->
+
+</mapper>
